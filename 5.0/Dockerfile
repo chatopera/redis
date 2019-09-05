@@ -34,6 +34,7 @@ RUN set -ex; \
 ENV REDIS_VERSION 5.0.5
 ENV REDIS_DOWNLOAD_URL http://download.redis.io/releases/redis-5.0.5.tar.gz
 ENV REDIS_DOWNLOAD_SHA 2139009799d21d8ff94fc40b7f36ac46699b9e1254086299f8d3b223ca54a375
+ENV REDIS_PASSWORD redis
 
 # for redis-sentinel see: http://redis.io/topics/sentinel
 RUN set -ex; \
@@ -81,4 +82,4 @@ COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 6379
-CMD ["redis-server"]
+CMD ["sh", "-c", "exec redis-server --requirepass \"$REDIS_PASSWORD\""]
