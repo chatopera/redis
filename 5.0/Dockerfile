@@ -74,6 +74,7 @@ RUN set -ex; \
 	\
 	apt-get purge -y --auto-remove $buildDeps
 
+COPY redis.conf /usr/local/etc/redis/redis.conf
 RUN mkdir /data && chown redis:redis /data
 VOLUME /data
 WORKDIR /data
@@ -82,4 +83,4 @@ COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 EXPOSE 6379
-CMD ["sh", "-c", "exec redis-server --requirepass \"$REDIS_PASSWORD\""]
+CMD ["sh", "-c", "exec redis-server /usr/local/etc/redis/redis.conf --requirepass \"$REDIS_PASSWORD\""]
