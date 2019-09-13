@@ -1,5 +1,18 @@
 # https://github.com/docker-library/redis
 
+```
+  redis:
+    image: chatopera/redis:5.0.5
+    environment:
+      - REDIS_PASSWORD=${DB_PASSWD:-123456}
+    restart: always
+    volumes:
+      - ./redis/data:/data
+    ports:
+      - "8041:6379"
+```
+Default auth password: `redis`
+
 ## Maintained by: [the Docker Community](https://github.com/docker-library/redis)
 
 This is the Git repo of the [Docker "Official Image"](https://docs.docker.com/docker-hub/official_repos/) for [redis](https://hub.docker.com/_/redis/) (not to be confused with any official redis image provided by redis upstream). See [the Docker Hub page](https://hub.docker.com/_/redis/) for the full readme on how to use this Docker image and for information regarding contributing and issues.
